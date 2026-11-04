@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpiritStory // Shop Drop</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body class="shop-page">
+
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">
+                SPIRIT//<span>STORY</span>
+            </a>
+            
+            <div class="search-container">
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Cerca drop, storie, distillati...">
+                    <select class="search-filter">
+                        <option value="all">Tutto</option>
+                        <option value="storie">Storie Brand</option>
+                        <option value="shop">E-Commerce</option>
+                    </select>
+                    <button class="btn-search">GO</button>
+                </div>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="/stories">STORIE</a></li>
+                <li><a href="/shop">SHOP</a></li>
+                <li><a href="/birre">BIRRE</a></li>
+                <li class="cart-icon"><a href="#">BAG [<span class="badge">0</span>]</a></li>
+                <li><a href="/login" class="btn-login">LOGIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="shop-layout">
+        <aside class="filters-sidebar">
+            <h2 class="sidebar-title">FILTRI_SISTEMA</h2>
+            
+            <div class="filter-group">
+                <h3>CATEGORIA</h3>
+                <label class="container-check">WHISKEY
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-check">AMARI
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-check">BIRRE ARTIGIANALI
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+            <div class="filter-group">
+                <h3>ORDINA PER</h3>
+                <select class="filter-select">
+                    <option>ULTIMI DROP</option>
+                    <option>PREZZO: LOW-HIGH</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <h3>RANGE PREZZO (€)</h3>
+                <input type="range" min="0" max="500" value="250" class="slider">
+            </div>
+
+            <button class="btn-apply-filters">APPLICA SETTAGGI</button>
+        </aside>
+
+        <section class="catalog-container">
+            <div class="catalog-header">
+                <span>RISULTATI TROVATI: [10]</span>
+            </div>
+
+            <div class="product-grid">
+                
+                <div class="product-card">
+                    <div class="card-image">
+                        <a href="/product-detail"><img src="jack-bottle.png" alt="Jack Classic"></a>
+                        <button class="quick-add">+ AGGIUNGI</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="brand">JACK DANIEL'S</p>
+                        <h4 class="product-name">OLD NO. 7 CLASSIC</h4>
+                        <div class="price-row"><span class="price">€25.00</span><a href="product-detail.html" class="view-detail">DETTAGLI</a></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image">
+                        <span class="tag-limited">NEW GUSTO</span>
+                        <a href="/product-detail"><img src="jack-bottle.png" alt="Jack Apple"></a>
+                        <button class="quick-add">+ AGGIUNGI</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="brand">JACK DANIEL'S</p>
+                        <h4 class="product-name">TENNESSEE APPLE (MELA VERDE)</h4>
+                        <div class="price-row"><span class="price">€28.00</span><a href="product-detail.html" class="view-detail">DETTAGLI</a></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image">
+                        <a href="/product-detail"><img src="jack-bottle.png" alt="Jack Honey"></a>
+                        <button class="quick-add">+ AGGIUNGI</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="brand">JACK DANIEL'S</p>
+                        <h4 class="/product-name">TENNESSEE HONEY (MIELE)</h4>
+                        <div class="price-row"><span class="price">€27.00</span><a href="product-detail.html" class="view-detail">DETTAGLI</a></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image">
+                        <a href="/product-detail"><img src="/images/jack.png" alt="Jack Fire"></a>
+                        <button class="quick-add">+ AGGIUNGI</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="brand">JACK DANIEL'S</p>
+                        <h4 class="/product-name">TENNESSEE FIRE (CANNELLA)</h4>
+                        <div class="price-row"><span class="price">€27.00</span><a href="product-detail.html" class="view-detail">DETTAGLI</a></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image">
+                        <a href="/product-detail"><img src="/images/ipa.png" alt="Jager Classic"></a>
+                        <button class="quick-add">+ AGGIUNGI</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="brand">JÄGERMEISTER</p>
+                        <h4 class="/product-name">ORIGINAL HERBAL</h4>
+                        <div class="price-row"><span class="price">€18.00</span><a href="product-detail.html" class="view-detail">DETTAGLI</a></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image">
+                        <span class="tag-limited">ORANGE DROP</span>
+                        <a href="/product-detail"><img src="/images/ipa.png" alt="Jager Orange"></a>
+                        <button class="quick-add">+ AGGIUNGI</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="brand">JÄGERMEISTER</p>
+                        <h4 class="product-name">JÄGERMEISTER ORANGE</h4>
+                        <div class="price-row"><span class="price">€22.00</span><a href="product-detail.html" class="view-detail">DETTAGLI</a></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image">
+                        <a href="/product-detail"><img src="/images/ipa.png" alt="Jager Scharf"></a>
+                        <button class="quick-add">+ AGGIUNGI</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="brand">JÄGERMEISTER</p>
+                        <h4 class="product-name">SCHARF HOT GINGER</h4>
+                        <div class="price-row"><span class="price">€21.00</span><a href="product-detail.html" class="view-detail">DETTAGLI</a></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image">
+                        <a href="/product-detail"><img src="/images/ipa.png" alt="Ichnusa"></a>
+                        <button class="quick-add">+ AGGIUNGI</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="brand">ICHNUSA</p>
+                        <h4 class="product-name">NON FILTRATA - SARDEGNA</h4>
+                        <div class="price-row"><span class="price">€2.50</span><a href="product-detail.html" class="view-detail">DETTAGLI</a></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image">
+                        <a href="/product-detail"><img src="/images/ipa.png" alt="Guinness"></a>
+                        <button class="quick-add">+ AGGIUNGI</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="brand">GUINNESS</p>
+                        <h4 class="product-name">DRAUGHT STOUT (NITRO)</h4>
+                        <div class="price-row"><span class="price">€4.50</span><a href="product-detail.html" class="view-detail">DETTAGLI</a></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image">
+                        <a href="/product-detail"><img src="/images/ipa.png" alt="Carlo Quinto"></a>
+                        <button class="quick-add">+ AGGIUNGI</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="brand">CHARLES QUINT</p>
+                        <h4 class="product-name">CARLO QUINTO - RUBY RED</h4>
+                        <div class="price-row"><span class="price">€6.00</span><a href="product-detail.html" class="view-detail">DETTAGLI</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>SPIRITSTORY // PROGETTO ESAME 2026 // AREA SHOP</p>
+    </footer>
+
+</body>
+</html>
