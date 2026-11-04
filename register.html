@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpiritStory // Join The Crew</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body class="login-page"> <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                SPIRIT//<span>STORY</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="stories.html">STORIE</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="birre.html" class="active">BIRRE</a></li>
+                <li><a href="index.html" class="btn-login">LOGO</a></li>
+                <li class="cart-icon"><a href="#">BAG [<span class="badge">0</span>]</a></li>
+                <li><a href="login.html" class="btn-login">LOGIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="login-layout">
+        <div class="login-container register-container">
+            <div class="login-header">
+                <h2>CREATE_ACCOUNT //</h2>
+                <p class="login-status">[ STATO: NUOVO UTENTE IN ATTESA ]</p>
+            </div>
+
+            <form class="login-form" action="#" method="POST">
+                <div class="input-box">
+                    <label>NOME_COMPLETO // USER_ID</label>
+                    <input type="text" placeholder="IL TUO NOME" required>
+                </div>
+
+                <div class="input-box">
+                    <label>EMAIL // COMUNICAZIONE</label>
+                    <input type="email" placeholder="NOME@EMAIL.COM" required>
+                </div>
+
+                <div class="input-box">
+                    <label>CHIAVE_ACCESSO // PASSWORD</label>
+                    <input type="password" placeholder="MIN 8 CARATTERI" required>
+                </div>
+
+                <div class="input-box">
+                    <label>CONFERMA_CHIAVE</label>
+                    <input type="password" placeholder="RIPETI PASSWORD" required>
+                </div>
+
+                <div class="login-options">
+                    <label class="container-check">ACCETTO I TERMINI DI ACCESSO
+                        <input type="checkbox" required>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit-auth">CREA_ACCOUNT_SISTEMA</button>
+            </form>
+
+            <div class="login-register-footer">
+                <span>HAI GIÀ UN ACCOUNT?</span>
+                <a href="login.html" class="register-link">LOG_IN // TORNA ALLA BASE</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>SPIRITSTORY // PROGETTO ESAME 2026 // USER ENROLLMENT</p>
+    </footer>
+
+</body>
+</html>

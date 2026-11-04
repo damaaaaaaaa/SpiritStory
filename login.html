@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpiritStory // System Auth</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body class="login-page">
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                SPIRIT//<span>STORY</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html#stories">STORIE</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="birre.html">BIRRE</a></li>
+                <li class="cart-icon"><a href="#">BAG [<span class="badge">0</span>]</a></li>
+                <li><a href="login.html" class="btn-login active">LOGIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="login-layout">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>LOG_IN // SISTEMA</h2>
+                <p class="login-status">[ STATO: ACCESSO RICHIESTO ]</p>
+            </div>
+
+            <form class="login-form" action="#" method="POST">
+                <div class="input-box">
+                    <label>ID_UTENTE // EMAIL</label>
+                    <input type="email" placeholder="NOME@EMAIL.COM" required>
+                </div>
+
+                <div class="input-box">
+                    <label>CHIAVE_ACCESSO // PASSWORD</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="login-options">
+                    <label class="container-check">RICORDAMI
+                        <input type="checkbox" checked>
+                        <span class="checkmark"></span>
+                    </label>
+                    <a href="#" class="forgot-link">[ RECUPERA_PASSWORD ]</a>
+                </div>
+
+                <button type="submit" class="btn-submit-auth">ACCEDI AL SISTERMA_</button>
+            </form>
+
+            <div class="login-register-footer">
+                <span>NON HAI UN ACCOUNT?</span>
+                <a href="register.html" class="register-link">REGISTRATI // JOIN THE CREW</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>SPIRITSTORY // PROGETTO ESAME 2026 // SECURITY PANEL</p>
+    </footer>
+
+</body>
+</html>
