@@ -3,102 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpiritStory // Jack Daniel's Legacy Edition</title>
+    <title>SpiritStory // Dettaglio Prodotto</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body class="product-page">
+<% 
+  // RETE DI SICUREZZA: se le variabili mancano, creiamo oggetti vuoti per evitare crash
+  const product = locals.product || {};
+  const reviews = locals.reviews || [];
+  const user = locals.user || null;
+%>
 
     <header>
         <nav class="navbar">
-            <a href="/index" class="logo">
+            <a href="/" class="logo">
                 SPIRIT//<span>STORY</span>
             </a>
             
             <div class="search-container">
-                <div class="search-bar">
+                <form action="/shop" method="GET" class="search-bar">
                     <span class="search-icon">🔍</span>
-                    <input type="text" placeholder="Cerca drop, storie, distillati...">
-                    <button class="btn-search">GO</button>
-                </div>
+                    <input type="text" name="search" placeholder="Cerca drop, storie, distillati...">
+                    <button type="submit" class="btn-search">GO</button>
+                </form>
             </div>
 
             <ul class="nav-links">
                 <li><a href="/stories">STORIE</a></li>
                 <li><a href="/shop">SHOP</a></li>
-                <li><a href="/birre" class="active">BIRRE</a></li>
-                <li><a href="/" class="btn-login">LOGO</a></li>
-                <li class="cart-icon"><a href="#">BAG [<span class="badge">0</span>]</a></li>
-                <li><a href="/login" class="btn-login">LOGIN</a></li>
+                <li><a href="/birre" class="<%= product.category === 'birra' ? 'active' : '' %>">BIRRE</a></li>
+                <li class="cart-icon"><a href="/cart">BAG [<span class="badge">0</span>]</a></li>
+                <% if (!user) { %>
+                    <li><a href="/login" class="btn-login">LOGIN</a></li>
+                <% } else { %>
+                    <li><a href="/logout" class="btn-login">LOGOUT</a></li>
+                <% } %>
             </ul>
         </nav>
     </header>
 
     <main class="product-detail-layout">
-        <section class="product-gallery">
-            <div class="main-image-container">
-                <span class="detail-tag-limited">LEGACY DROP</span>
-                <img src="/images/jack.png" alt="Jack Daniel's Legacy Edition">
-            </div>
-            <div class="image-thumbnails">
-                <div class="thumb active"><img src="jack-bottle.png" alt="Front"></div>
-                <div class="thumb"><img src="jack-bottle.png" alt="Label Detail" style="transform: scale(1.5);"></div>
-                <div class="thumb"><img src="jack-bottle.png" alt="Back" style="filter: brightness(0.5);"></div>
-            </div>
-        </section>
-
-        <section class="product-info-panel">
-            <div class="product-meta">
-                <p class="product-brand-link">JACK DANIEL'S DISTILLERY</p>
-                <h1 class="product-main-title">OLD NO. 7 LEGACY EDITION</h1>
-                <p class="product-serial">SYS_REF: #JD-700-LE2026</p>
-            </div>
-
-            <div class="product-price-box">
-                <span class="current-price">€45.00</span>
-                <span class="availability-status">[ DISPONIBILITÀ: ALTA ]</span>
-            </div>
-
-            <div class="product-description">
-                <p class="desc-highlight">Un ritorno alle origini del mito. La Legacy Edition celebra le storiche etichette del Tennessee Whiskey prima del celebre design total black dell'inizio del '100.</p>
-                <p class="desc-text">Caratterizzato dal classico filtraggio a carbone attivo "Lincoln County Process" e dall'invecchiamento in botti di quercia vergine tostate a mano. Note intense di caramello, vaniglia e quel fumo leggero inconfondibile che definisce lo streetwear dei distillati.</p>
-            </div>
-
-            <div class="purchase-actions">
-                <div class="quantity-selector">
-                    <button class="qty-btn">-</button>
-                    <input type="number" value="1" min="1" max="10" readonly>
-                    <button class="qty-btn">+</button>
+        <% if (product.id) { %>
+            <section class="product-gallery">
+                <div class="main-image-container">
+                    <span class="detail-tag-limited"><%= product.category === 'birra' ? 'CRAFT DROP' : 'LEGACY DROP' %></span>
+                    <img src="<%= product.image %>" alt="<%= product.name %>">
                 </div>
-                <button class="btn-add-to-bag">AGGIUNGI ALLA BAG</button>
-            </div>
+                <div class="image-thumbnails">
+                    <!-- Lascio la tua galleria fissa, puoi renderla dinamica se aggiungi più foto al DB -->
+                    <div class="thumb active"><img src="/images/jack.png" alt="Front"></div>
+                    <div class="thumb"><img src="/images/jack.png" alt="Label Detail" style="transform: scale(1.5);"></div>
+                    <div class="thumb"><img src="/images/jack.png" alt="Back" style="filter: brightness(0.5);"></div>
+                </div>
+            </section>
 
-            <div class="technical-specs">
-                <h3 class="specs-title">SPECIFICHE_PRODOTTO</h3>
-                <table class="specs-table">
-                    <tr>
-                        <td>PROVENIENZA</td>
-                        <td>LYNCHBURG, TENNESSEE (USA)</td>
-                    </tr>
-                    <tr>
-                        <td>GRADAZIONE ALCOLICA</td>
-                        <td>43% VOL.</td>
-                    </tr>
-                    <tr>
-                        <td>VOLUME BOTTIGLIA</td>
-                        <td>70CL (700ML)</td>
-                    </tr>
-                    <tr>
-                        <td>MATURAZIONE</td>
-                        <td>BOTTI DI QUERCIA AMERICANA FIAMMATE</td>
-                    </tr>
-                    <tr>
-                        <td>PROFILO AROMATICO</td>
-                        <td>BANANA MATURA, LIQUIRIZIA, CARAMELLO BRUCIATO</td>
-                    </tr>
-                </table>
+            <section class="product-info-panel">
+                <div class="product-meta">
+                    <p class="product-brand-link"><%= product.brand %></p>
+                    <h1 class="product-main-title"><%= product.name %></h1>
+                    <p class="product-serial">SYS_REF: #ID-<%= product.id %>-2026</p>
+                </div>
+
+                <div class="product-price-box">
+                    <span class="current-price">€<%= Number(product.price).toFixed(2) %></span>
+                    <span class="availability-status">[ DISPONIBILITÀ: ALTA ]</span>
+                </div>
+
+                <div class="product-description">
+                    <p class="desc-highlight">La storia in una bottiglia.</p>
+                    <p class="desc-text"><%= product.story %></p>
+                    
+                    <h3 style="margin-top: 20px; color: #fff; text-transform: uppercase;">Drink Tips</h3>
+                    <p class="desc-text" style="color: #aaa;"><%= product.drink_tips %></p>
+                </div>
+
+                <!-- FORM DI AGGIUNTA AL CARRELLO -->
+                <form action="/cart/add/<%= product.id %>" method="POST" class="purchase-actions">
+                    <div class="quantity-selector">
+                        <input type="number" name="quantity" value="1" min="1" max="10" style="width: 50px; text-align: center; border: none; background: #333; color: white; padding: 10px;">
+                    </div>
+                    <button type="submit" class="btn-add-to-bag">AGGIUNGI ALLA BAG</button>
+                </form>
+
+                <div class="technical-specs">
+                    <h3 class="specs-title">RECENSIONI COMMUNITY</h3>
+                    
+                    <!-- AREA RECENSIONI -->
+                    <% if (reviews.length > 0) { %>
+                        <div style="background: #1a1a1a; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                            <% reviews.forEach(function(rev) { %>
+                                <div style="margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+                                    <strong style="color: #00ffcc;"><%= rev.username %></strong> <span style="color: gold;">(Voto: <%= rev.rating %>/5)</span>
+                                    <p style="color: #ccc; margin-top: 5px; font-size: 0.9em;"><%= rev.comment %></p>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } else { %>
+                        <p style="color: #777; margin-bottom: 20px;">Ancora nessuna recensione.</p>
+                    <% } %>
+
+                    <!-- FORM NUOVA RECENSIONE (Solo se loggato!) -->
+                    <% if (user && user.role === 'user') { %>
+                        <h4 style="margin-bottom: 10px; color: white;">Lascia il tuo feedback</h4>
+                        <form action="/product/<%= product.id %>/review" method="POST" style="display: flex; flex-direction: column; gap: 10px;">
+                            <select name="rating" style="padding: 10px; background: #333; color: white; border: none;">
+                                <option value="5">5 Stelle (Hype Totale)</option>
+                                <option value="4">4 Stelle (Ottimo)</option>
+                                <option value="3">3 Stelle (Buono)</option>
+                                <option value="2">2 Stelle (Mediocre)</option>
+                                <option value="1">1 Stella (Skip)</option>
+                            </select>
+                            <textarea name="comment" rows="3" placeholder="Cosa ne pensi?" style="padding: 10px; background: #333; color: white; border: none;"></textarea>
+                            <button type="submit" style="padding: 10px; background: #ff3366; color: white; border: none; font-weight: bold; cursor: pointer;">INVIA</button>
+                        </form>
+                    <% } else if (!user) { %>
+                        <p style="color: #ff3366;"><a href="/login" style="color: #ff3366; text-decoration: underline;">Fai Log In</a> per lasciare una recensione.</p>
+                    <% } %>
+                </div>
+            </section>
+        <% } else { %>
+            <div style="padding: 100px; text-align: center; color: white;">
+                <h1>PRODOTTO NON TROVATO</h1>
+                <p>SYS_ERR: 404</p>
+                <a href="/shop" style="color: #00ffcc;">TORNA ALLO SHOP</a>
             </div>
-        </section>
+        <% } %>
     </main>
 
     <footer>

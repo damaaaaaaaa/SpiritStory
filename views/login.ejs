@@ -32,15 +32,18 @@
                 <p class="login-status">[ STATO: ACCESSO RICHIESTO ]</p>
             </div>
 
-            <form class="login-form" action="#" method="POST">
+            <form class="login-form" action="/login" method="POST">
+    
                 <div class="input-box">
                     <label>ID_UTENTE // EMAIL</label>
-                    <input type="email" placeholder="NOME@EMAIL.COM" required>
+                    <!-- AGGIUNTO name="email" -->
+                    <input type="email" name="email" placeholder="NOME@EMAIL.COM" required>
                 </div>
 
                 <div class="input-box">
                     <label>CHIAVE_ACCESSO // PASSWORD</label>
-                    <input type="password" placeholder="••••••••" required>
+                    <!-- AGGIUNTO name="password" -->
+                    <input type="password" name="password" placeholder="••••••••" required>
                 </div>
 
                 <div class="login-options">
