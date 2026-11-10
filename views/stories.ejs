@@ -2,10 +2,9 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpiritStory // Brand Heritage</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
 </head>
 <body class="stories-page">
 
@@ -13,62 +12,65 @@
         <nav class="navbar">
             <a href="/" class="logo">SPIRIT//<span>STORY</span></a>
             <ul class="nav-links">
-                <li><a href="/stories">STORIE</a></li>
+                <li><a href="/stories" class="active">STORIE</a></li>
                 <li><a href="/shop">SHOP</a></li>
                 <li><a href="/birre">BIRRE</a></li>
-                <li class="cart-icon"><a href="#">BAG [<span class="badge">0</span>]</a></li>
-                <li><a href="/login" class="btn-login">LOGIN</a></li>
+                <li><a href="/cart" class="btn-outline">LA TUA BAG</a></li>
             </ul>
         </nav>
     </header>
 
-    <main style="padding: 5rem 8%;">
+    <main style="padding: 5rem 8%; max-width: 1400px; margin: 0 auto;">
         <div class="stories-intro">
-            <h1 style="font-size: clamp(3rem, 10vw, 5rem); line-height: 0.9; margin-bottom: 2rem;">REBELS_<br><span class="text-neon">HISTORY</span></h1>
-            <p style="max-width: 600px; color: var(--text-muted); margin-bottom: 4rem;">Non solo alcol. Dietro ogni etichetta c'è una rivoluzione, un club segreto o un artigiano che ha rotto le regole del sistema. Leggi i nostri archivi.</p>
+            <h1 style="font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 2rem;">REBELS_<br><span class="text-neon">HISTORY</span></h1>
+            <p style="max-width: 650px; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 4rem;">Non vendiamo solo alcol. Dietro ogni etichetta c'è una rivoluzione, un club segreto o un artigiano che ha rotto le regole del sistema. Leggi i nostri archivi.</p>
         </div>
 
         <section class="stories-grid">
+            
+            <!-- STORIA 1 (In evidenza) -->
             <article class="story-card featured">
                 <div class="story-img-container">
                     <img src="https://images.unsplash.com/photo-1527281405159-35d5b9a1195e?auto=format&fit=crop&q=80&w=1200" alt="Jack Daniel's Story">
                     <span class="story-tag">TOP STORY</span>
                 </div>
                 <div class="story-content">
-                    <span class="story-date">ARCHIVIO // 01.2026</span>
+                    <span class="story-date">ARCHIVIO // TENNESSEE</span>
                     <h2>IL RAGAZZO CHE CREÒ L'ORO NERO</h2>
-                    <p>La vera storia di Jasper Newton "Jack" Daniel: dalla fuga di casa alla creazione del whiskey più venduto al mondo, tra segreti di distillazione e leggende metropolitane.</p>
-                    <a href="#" class="btn-read-more">[ LEGGI TUTTO_ ]</a>
+                    <p>La leggenda narra che Jasper Newton "Jack" Daniel scappò di casa da bambino e fu accolto da un pastore luterano, Dan Call. Ma il vero segreto della distillazione gli fu insegnato da Nathan "Nearest" Green, uno schiavo afroamericano che divenne il primo Master Distiller della storia americana.</p>
+                    <p>Oggi, la bottiglia squadrata e l'etichetta nera (nata dopo la morte di Jack in segno di lutto) sono icone indiscusse della cultura pop, dalla musica rock dei Motörhead fino alle strade del mondo intero.</p>
                 </div>
             </article>
 
+            <!-- STORIA 2 -->
             <article class="story-card">
                 <div class="story-img-container">
                     <img src="https://images.unsplash.com/photo-1620216503953-6a9082006323?auto=format&fit=crop&q=80&w=800" alt="Craft Beer Story">
                 </div>
                 <div class="story-content">
-                    <span class="story-date">CRAFT_CULTURE</span>
+                    <span class="story-date">CRAFT_CULTURE // UK-INDIA</span>
                     <h3>RIVOLUZIONE IPA: DAL MARE AI PUB</h3>
-                    <p>Come una birra destinata alle colonie indiane è diventata il simbolo dello streetwear dei distillati.</p>
-                    <a href="#" class="btn-read-more">[ LEGGI_ ]</a>
+                    <p>Alla fine del 1700, l'Impero Britannico aveva un problema: la birra inviata alle truppe in India marciva durante i mesi di viaggio in nave. La soluzione? Riempirla di luppolo (un conservante naturale) e aumentare l'alcol. Nacquero così le India Pale Ale (IPA).</p>
+                    <p>Oggi l'amaro estremo e i profumi tropicali dei luppoli americani hanno trasformato la IPA nella regina incontrastata della birra artigianale underground.</p>
                 </div>
             </article>
 
+            <!-- STORIA 3 -->
             <article class="story-card">
                 <div class="story-img-container">
                     <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&q=80&w=800" alt="Jager Story">
                 </div>
                 <div class="story-content">
-                    <span class="story-date">UNDERGROUND_MIX</span>
-                    <h3>JÄGERMEISTER: OLTRE IL GHIACCIO</h3>
-                    <p>Dalle foreste tedesche ai palchi dei festival rock. Un viaggio tra 56 erbe e un'identità visiva d'acciaio.</p>
-                    <a href="#" class="btn-read-more">[ LEGGI_ ]</a>
+                    <span class="story-date">UNDERGROUND_MIX // GERMANIA</span>
+                    <h3>JÄGERMEISTER: IL SANGUE DEL CERVO</h3>
+                    <p>Nato nel 1934 dalla mente di Curt Mast, un appassionato cacciatore, questo liquore contiene 56 tra erbe, radici e frutti. L'iconico cervo con la croce si ispira alla leggenda di Sant'Uberto, patrono dei cacciatori.</p>
+                    <p>Partito come digestivo per anziani bavaresi, negli anni '90 è stato adottato dalle band metal e dalla cultura rave, diventando il simbolo delle notti infinite servito rigorosamente a -18°C.</p>
                 </div>
             </article>
+
         </section>
     </main>
 
     <footer><p>SPIRITSTORY // PROGETTO ESAME 2026 // MAGAZINE</p></footer>
-
 </body>
 </html>

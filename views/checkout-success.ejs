@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>SpiritStory // Acquisto Confermato</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
+</head>
+<body class="success-page">
+    
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">SPIRIT//<span>STORY</span></a>
+        </nav>
+    </header>
+
+    <main class="success-layout">
+        <div class="success-container">
+            
+            <div class="success-icon-wrapper">
+                <div class="success-icon">✓</div>
+            </div>
+            
+            <h1 class="success-title">ACQUISTO CONFERMATO</h1>
+            <p class="success-message">Il tuo ordine è stato elaborato dai nostri sistemi. Riceverai a breve un'email con i dettagli della spedizione e il codice di tracking.</p>
+            
+            <div class="success-order-details">
+                <!-- Genera un numero d'ordine casuale realistico -->
+                <p><strong>ID ORDINE:</strong> #SYS-<%= Math.floor(Math.random() * 900000) + 100000 %>-2026</p>
+                <p><strong>DATA:</strong> <%= new Date().toLocaleDateString('it-IT') %></p>
+                <p><strong>STATO SISTEMA:</strong> <span class="status-neon">IN PREPARAZIONE</span></p>
+            </div>
+
+            <div class="success-actions">
+                <a href="/shop" class="btn-primary">TORNA ALLO SHOP</a>
+                <a href="/" class="btn-outline">VAI ALLA HOME</a>
+            </div>
+            
+        </div>
+    </main>
+
+    <script src="/javascripts/main.js"></script>
+</body>
+</html>

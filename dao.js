@@ -155,3 +155,120 @@ exports.addToCartDB = (userId, productId, quantity = 1) => {
     });
   });
 };
+
+// Registrazione sicura (con ruolo)
+exports.registerUser = (username, email, password, role = 'user') => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const hash = await bcrypt.hash(password, 10);
+      const sql = 'INSERT INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)';
+      db.run(sql, [username, email, hash, role], function(err) {
+        if (err) reject(err);
+        else resolve(this.lastID);
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
+// Aggiunta Prodotti (Admin)
+exports.addProduct = (brand, name, category, price, image, story, drink_tips) => {
+  return new Promise((resolve, reject) => {
+    const sql = `INSERT INTO products (brand, name, category, price, image, story, drink_tips) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    db.run(sql, [brand, name, category, price, image, story, drink_tips], function(err) {
+      if (err) reject(err);
+      else resolve(this.lastID);
+    });
+  });
+};
+
+// =================================================================
+// NUOVE FUNZIONI PER IL 30 E LODE (Ordini, Profilo, Admin Avanzato)
+// =================================================================
+
+// --- GESTIONE ORDINI (User & Admin) ---
+exports.createOrder = (userId, cartItems, total) => {
+  return new Promise((resolve, reject) => {
+    // Inserisce l'ordine principale
+    const sqlOrder = 'INSERT INTO orders (user_id, total, status, date) VALUES (?, ?, ?, CURRENT_TIMESTAMP)';
+    db.run(sqlOrder, [userId, total, 'In Preparazione'], function(err) {
+      if (err) return reject(err);
+      const orderId = this.lastID;
+      
+      // Inserisce i singoli prodotti dell'ordine e scala lo stock
+      const sqlItem = 'INSERT INTO cart_items (order_id, product_id) VALUES (?, ?)';
+      const sqlStock = 'UPDATE products SET stock = stock - 1 WHERE id = ?';
+      
+      cartItems.forEach(productId => {
+          db.run(sqlItem, [orderId, productId]);
+          db.run(sqlStock, [productId]); // Modifica i livelli di stock in tempo reale
+      });
+      resolve(orderId);
+    });
+  });
+};
+
+exports.getUserOrders = (userId) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM orders WHERE user_id = ? ORDER BY date DESC';
+    db.all(sql, [userId], (err, rows) => {
+      if (err) reject(err);
+      else resolve(rows);
+    });
+  });
+};
+
+exports.getAllOrders = () => {
+  return new Promise((resolve, reject) => {
+    const sql = `SELECT orders.*, users.username, users.email 
+                 FROM orders JOIN users ON orders.user_id = users.id 
+                 ORDER BY date DESC`;
+    db.all(sql, [], (err, rows) => {
+      if (err) reject(err);
+      else resolve(rows);
+    });
+  });
+};
+
+exports.updateOrderStatus = (orderId, status) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'UPDATE orders SET status = ? WHERE id = ?';
+    db.run(sql, [status, orderId], function(err) {
+      if (err) reject(err);
+      else resolve(this.changes);
+    });
+  });
+};
+
+// --- GESTIONE UTENTI E RECENSIONI (Admin) ---
+exports.getAllUsers = () => {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT id, username, email, role FROM users';
+    db.all(sql, [], (err, rows) => {
+      if (err) reject(err);
+      else resolve(rows);
+    });
+  });
+};
+
+exports.deleteUser = (userId) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'DELETE FROM users WHERE id = ?';
+    db.run(sql, [userId], function(err) {
+      if (err) reject(err);
+      else resolve(this.changes);
+    });
+  });
+};
+
+exports.deleteReview = (reviewId) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'DELETE FROM reviews WHERE id = ?';
+    db.run(sql, [reviewId], function(err) {
+      if (err) reject(err);
+      else resolve(this.changes);
+    });
+  });
+};

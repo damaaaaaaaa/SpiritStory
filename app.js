@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
-// LA RIGA QUI SOTTO È QUELLA CHE RISOLVE L'ERRORE "Unknown authentication strategy":
+
 const LocalStrategy = require('passport-local').Strategy; 
 const dao = require('./dao');
 
@@ -42,8 +42,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Passa i dati dell'utente a tutte le pagine EJS
+// Passa i dati dell'utente e il carrello a tutte le pagine EJS
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
+  // Calcola quanti elementi ci sono nel carrello della sessione
+  res.locals.cartCount = req.session.cart ? req.session.cart.length : 0;
   next();
 });
 

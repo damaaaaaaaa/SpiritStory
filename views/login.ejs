@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpiritStory // System Auth</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
-</head>
-<body class="login-page">
-
-    <header>
-        <nav class="navbar">
-            <a href="/" class="logo">
-                SPIRIT//<span>STORY</span>
-            </a>
-            
-            <ul class="nav-links">
-                <li><a href="/">STORIE</a></li>
-                <li><a href="/shop">SHOP</a></li>
-                <li><a href="/birre">BIRRE</a></li>
-                <li class="cart-icon"><a href="#">BAG [<span class="badge">0</span>]</a></li>
-                <li><a href="/login" class="btn-login active">LOGIN</a></li>
-            </ul>
-        </nav>
-    </header>
+<%- include('header', { bodyClass: 'login-page' }); -%>
 
     <main class="login-layout">
         <div class="login-container">
@@ -31,32 +6,17 @@
                 <h2>LOG_IN // SISTEMA</h2>
                 <p class="login-status">[ STATO: ACCESSO RICHIESTO ]</p>
             </div>
-
             <form class="login-form" action="/login" method="POST">
-    
                 <div class="input-box">
                     <label>ID_UTENTE // EMAIL</label>
-                    <!-- AGGIUNTO name="email" -->
                     <input type="email" name="email" placeholder="NOME@EMAIL.COM" required>
                 </div>
-
                 <div class="input-box">
                     <label>CHIAVE_ACCESSO // PASSWORD</label>
-                    <!-- AGGIUNTO name="password" -->
                     <input type="password" name="password" placeholder="••••••••" required>
                 </div>
-
-                <div class="login-options">
-                    <label class="container-check">RICORDAMI
-                        <input type="checkbox" checked>
-                        <span class="checkmark"></span>
-                    </label>
-                    <a href="#" class="forgot-link">[ RECUPERA_PASSWORD ]</a>
-                </div>
-
-                <button type="submit" class="btn-submit-auth">ACCEDI AL SISTERMA_</button>
+                <button type="submit" class="btn-submit-auth">ACCEDI AL SISTEMA_</button>
             </form>
-
             <div class="login-register-footer">
                 <span>NON HAI UN ACCOUNT?</span>
                 <a href="/register" class="register-link">REGISTRATI // JOIN THE CREW</a>
@@ -64,9 +24,4 @@
         </div>
     </main>
 
-    <footer>
-        <p>SPIRITSTORY // PROGETTO ESAME 2026 // SECURITY PANEL</p>
-    </footer>
-
-</body>
-</html>
+<%- include('footer'); -%>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpiritStory // Premium E-Commerce</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
+</head>
+<body class="<%= locals.bodyClass || '' %>">
+<% 
+    // Variabili sicure per evitare crash 
+    const safeUser = locals.user || null;
+    const safeCartCount = locals.cartCount || 0;
+%>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">SPIRIT//<span>STORY</span></a>
+            
+            <div class="search-container">
+                <form action="/shop" method="GET" class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" name="search" placeholder="Cerca drop, storie, distillati..." required>
+                    <button type="submit" class="btn-search">GO</button>
+                </form>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="/stories">STORIE</a></li>
+                <li><a href="/shop">SHOP</a></li>
+                <li><a href="/birre">BIRRE</a></li>
+                <li class="cart-icon">
+                    <a href="/cart">BAG [<span class="badge"><%= safeCartCount %></span>]</a>
+                </li>
+                
+                <% if (!safeUser) { %>
+                    <li><a href="/login" class="btn-login">LOGIN</a></li>
+                <% } else { %>
+                    <% if (safeUser.role === 'admin') { %>
+                        <li><a href="/admin" style="color: var(--brand-neon);">ADMIN PANEL</a></li>
+                    <% } %>
+                    <li><a href="/logout" class="btn-login">LOGOUT</a></li>
+                    <li><a href="/profile">PROFILO</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>

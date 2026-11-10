@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpiritStory // La tua Bag</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
+</head>
+<body class="cart-page">
+    
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">SPIRIT//<span>STORY</span></a>
+            <ul class="nav-links">
+                <li><a href="/shop" class="btn-outline">TORNA ALLO SHOP</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="cart-layout">
+        <h1 class="cart-title">LA TUA BAG</h1>
+
+        <% if (locals.cartItems && locals.cartItems.length > 0) { %>
+            <div class="cart-container">
+                <ul class="cart-list">
+                    <% cartItems.forEach(function(item) { %>
+                        <li class="cart-item-row">
+                            <img src="<%= item.image %>" alt="<%= item.name %>" class="cart-item-img">
+                            <div class="cart-item-details">
+                                <span class="cart-item-brand"><%= item.brand %></span>
+                                <h3 class="cart-item-name"><%= item.name %></h3>
+                            </div>
+                            <div class="cart-item-price">
+                                €<%= Number(item.price).toFixed(2) %>
+                            </div>
+                        </li>
+                    <% }); %>
+                </ul>
+                
+                <div class="cart-total-section">
+                    <h2>TOTALE: <span>€<%= Number(locals.total).toFixed(2) %></span></h2>
+                    <!-- Il form punta alla rotta del checkout -->
+                    <form action="/checkout" method="POST">
+                        <button type="submit" class="btn-primary btn-large">PROCEDI ALL'ACQUISTO</button>
+                    </form>
+                </div>
+            </div>
+        <% } else { %>
+            <div class="cart-empty-state">
+                <div class="empty-icon">🛒</div>
+                <h2>La tua bag è vuota.</h2>
+                <p>Scopri le nostre selezioni premium e aggiungi i tuoi drop preferiti.</p>
+                <a href="/shop" class="btn-primary">ESPLORA LO SHOP</a>
+            </div>
+        <% } %>
+    </main>
+
+    <footer>
+        <p>SPIRITSTORY // PROGETTO ESAME 2026 // PREMIUM E-COMMERCE</p>
+    </footer>
+    
+    <script src="/javascripts/main.js"></script>
+</body>
+</html>

@@ -2,76 +2,72 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpiritStory // Join The Crew</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
 </head>
-<body class="login-page"> <header>
+<body class="login-layout"> 
+    
+    <header>
         <nav class="navbar">
-            <a href="/" class="logo">
-                SPIRIT//<span>STORY</span>
-            </a>
-            
+            <a href="/" class="logo">SPIRIT//<span>STORY</span></a>
             <ul class="nav-links">
-                <li><a href="/stories">STORIE</a></li>
-                <li><a href="/shop">SHOP</a></li>
-                <li><a href="/birre" class="active">BIRRE</a></li>
-                <li><a href="/" class="btn-login">LOGO</a></li>
-                <li class="cart-icon"><a href="#">BAG [<span class="badge">0</span>]</a></li>
-                <li><a href="/login" class="btn-login">LOGIN</a></li>
+                <li><a href="/shop" class="btn-outline">TORNA ALLO SHOP</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="login-layout">
-        <div class="login-container register-container">
-            <div class="login-header">
-                <h2>CREATE_ACCOUNT //</h2>
-                <p class="login-status">[ STATO: NUOVO UTENTE IN ATTESA ]</p>
+    <main class="login-container register-container" style="margin: 6rem auto;">
+        <div class="login-header">
+            <h2>CREATE_ACCOUNT //</h2>
+            <p class="login-status">[ STATO: NUOVO UTENTE IN ATTESA ]</p>
+            
+            <!-- Mostra eventuali errori di validazione (password corta, ecc) -->
+            <% if (locals.error) { %>
+                <div style="background: var(--error-red); color: white; padding: 10px; margin-top: 15px; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 700;">
+                    <%= error %>
+                </div>
+            <% } %>
+        </div>
+
+        <form class="login-form" action="/register" method="POST">
+            <div class="input-box">
+                <label>NOME_COMPLETO // USER_ID</label>
+                <!-- AGGIUNTO name="username" -->
+                <input type="text" name="username" placeholder="Es. Mario Rossi" required>
             </div>
 
-            <form class="login-form" action="#" method="POST">
-                <div class="input-box">
-                    <label>NOME_COMPLETO // USER_ID</label>
-                    <input type="text" placeholder="IL TUO NOME" required>
-                </div>
-
-                <div class="input-box">
-                    <label>EMAIL // COMUNICAZIONE</label>
-                    <input type="email" placeholder="NOME@EMAIL.COM" required>
-                </div>
-
-                <div class="input-box">
-                    <label>CHIAVE_ACCESSO // PASSWORD</label>
-                    <input type="password" placeholder="MIN 8 CARATTERI" required>
-                </div>
-
-                <div class="input-box">
-                    <label>CONFERMA_CHIAVE</label>
-                    <input type="password" placeholder="RIPETI PASSWORD" required>
-                </div>
-
-                <div class="login-options">
-                    <label class="container-check">ACCETTO I TERMINI DI ACCESSO
-                        <input type="checkbox" required>
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-
-                <button type="submit" class="btn-submit-auth">CREA_ACCOUNT_SISTEMA</button>
-            </form>
-
-            <div class="login-register-footer">
-                <span>HAI GIÀ UN ACCOUNT?</span>
-                <a href="/login" class="register-link">LOG_IN // TORNA ALLA BASE</a>
+            <div class="input-box">
+                <label>EMAIL // COMUNICAZIONE</label>
+                <!-- AGGIUNTO name="email" -->
+                <input type="email" name="email" placeholder="NOME@EMAIL.COM" required>
             </div>
+
+            <div class="input-box">
+                <label>CHIAVE_ACCESSO // PASSWORD</label>
+                <!-- AGGIUNTO name="password" -->
+                <input type="password" name="password" placeholder="MIN 8 CARATTERI, 1 NUMERO, 1 SIMBOLO" required>
+            </div>
+
+            <div class="input-box">
+                <label>CONFERMA_CHIAVE</label>
+                <!-- AGGIUNTO name="confirm_password" -->
+                <input type="password" name="confirm_password" placeholder="RIPETI PASSWORD" required>
+            </div>
+
+            <div class="input-box" style="margin-top: 10px; border-top: 1px solid var(--border-light); padding-top: 15px;">
+                <label style="color: var(--brand-neon);">[OPZIONALE] CODICE AUTORIZZAZIONE ADMIN</label>
+                <input type="password" name="admin_secret" placeholder="Lascia vuoto se sei un utente normale">
+            </div>
+
+            <button type="submit" class="btn-submit-auth">CREA_ACCOUNT_SISTEMA</button>
+        </form>
+
+        <div class="login-register-footer">
+            <span>HAI GIÀ UN ACCOUNT?</span>
+            <a href="/login" class="register-link">LOG_IN // TORNA ALLA BASE</a>
         </div>
     </main>
-
-    <footer>
-        <p>SPIRITSTORY // PROGETTO ESAME 2026 // USER ENROLLMENT</p>
-    </footer>
 
 </body>
 </html>

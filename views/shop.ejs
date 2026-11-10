@@ -1,307 +1,68 @@
-
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpiritStory // Shop Drop</title>
-
-    <link rel="stylesheet" href="/stylesheets/style.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
-</head>
-
-<body class="shop-page">
-
-<%
-    // PARACADUTE: se il server non passa queste variabili,
-    // le inizializziamo vuote così non crasha MAI!
-
+<%- include('header', { bodyClass: 'shop-page' }); -%>
+<% 
     const safeFilters = locals.filters || {};
     const safeProducts = locals.products || [];
-    const safeUser = locals.user || null;
-    const safeCartCount = locals.cartCount || 0;
 %>
 
-    <header>
-        <nav class="navbar">
-
-            <a href="/" class="logo">
-                SPIRIT//<span>STORY</span>
-            </a>
-
-            <div class="search-container">
-                <form action="/shop" method="GET" class="search-bar">
-
-                    <span class="search-icon">🔍</span>
-
-                    <input
-                        type="text"
-                        name="search"
-                        value="<%= safeFilters.search || '' %>"
-                        placeholder="Cerca drop, storie, distillati..."
-                    >
-
-                    <select name="category" class="search-filter">
-                        <option value="all" <%= safeFilters.category === 'all' ? 'selected' : '' %>>
-                            Tutto
-                        </option>
-
-                        <option value="distillato" <%= safeFilters.category === 'distillato' ? 'selected' : '' %>>
-                            Distillati (Whiskey & Amari)
-                        </option>
-
-                        <option value="birra" <%= safeFilters.category === 'birra' ? 'selected' : '' %>>
-                            Birre Artigianali
-                        </option>
-                    </select>
-
-                    <button type="submit" class="btn-search">
-                        GO
-                    </button>
-
-                </form>
-            </div>
-
-            <ul class="nav-links">
-
-                <li><a href="/stories">STORIE</a></li>
-                <li><a href="/shop">SHOP</a></li>
-                <li><a href="/birre">BIRRE</a></li>
-
-                <li class="cart-icon">
-                    <a href="/cart">
-                        BAG [<span class="badge"><%= safeCartCount %></span>]
-                    </a>
-                </li>
-
-                <% if (!safeUser) { %>
-
-                    <li>
-                        <a href="/login" class="btn-login">LOGIN</a>
-                    </li>
-
-                <% } else { %>
-
-                    <% if (safeUser.role === 'admin') { %>
-
-                        <li>
-                            <a href="/admin" class="btn-login">ADMIN</a>
-                        </li>
-
-                    <% } %>
-
-                    <li>
-                        <a href="/logout" class="btn-login">
-                            LOGOUT (<%= safeUser.username %>)
-                        </a>
-                    </li>
-
-                <% } %>
-
-            </ul>
-
-        </nav>
-    </header>
-
-
     <main class="shop-layout">
-
         <!-- SIDEBAR FILTRI -->
-
         <form action="/shop" method="GET" class="filters-sidebar">
-
             <h2 class="sidebar-title">FILTRI_SISTEMA</h2>
-
             <div class="filter-group">
-
                 <h3>CATEGORIA</h3>
-
-                <label class="container-check">
-                    DISTILLATI (WHISKEY & AMARI)
-
-                    <input
-                        type="radio"
-                        name="category"
-                        value="distillato"
-                        <%= safeFilters.category === 'distillato' ? 'checked' : '' %>
-                    >
-
+                <label class="container-check">DISTILLATI (WHISKEY)
+                    <input type="radio" name="category" value="distillato" <%= safeFilters.category === 'distillato' ? 'checked' : '' %>>
                     <span class="checkmark"></span>
                 </label>
-
-                <label class="container-check">
-                    BIRRE ARTIGIANALI
-
-                    <input
-                        type="radio"
-                        name="category"
-                        value="birra"
-                        <%= safeFilters.category === 'birra' ? 'checked' : '' %>
-                    >
-
+                <label class="container-check">BIRRE ARTIGIANALI
+                    <input type="radio" name="category" value="birra" <%= safeFilters.category === 'birra' ? 'checked' : '' %>>
                     <span class="checkmark"></span>
                 </label>
-
-                <label class="container-check">
-                    MOSTRA TUTTO
-
-                    <input
-                        type="radio"
-                        name="category"
-                        value="all"
-                        <%= (!safeFilters.category || safeFilters.category === 'all') ? 'checked' : '' %>
-                    >
-
+                <label class="container-check">MOSTRA TUTTO
+                    <input type="radio" name="category" value="all" <%= (!safeFilters.category || safeFilters.category === 'all') ? 'checked' : '' %>>
                     <span class="checkmark"></span>
                 </label>
-
             </div>
 
-
             <div class="filter-group">
-
                 <h3>ORDINA PER</h3>
-
                 <select name="sort" class="filter-select">
-
-                    <option value="newest" <%= safeFilters.sort === 'newest' ? 'selected' : '' %>>
-                        ULTIMI DROP
-                    </option>
-
-                    <option value="price_asc" <%= safeFilters.sort === 'price_asc' ? 'selected' : '' %>>
-                        PREZZO: LOW-HIGH
-                    </option>
-
-                    <option value="price_desc" <%= safeFilters.sort === 'price_desc' ? 'selected' : '' %>>
-                        PREZZO: HIGH-LOW
-                    </option>
-
+                    <option value="newest" <%= safeFilters.sort === 'newest' ? 'selected' : '' %>>ULTIMI DROP</option>
+                    <option value="price_asc" <%= safeFilters.sort === 'price_asc' ? 'selected' : '' %>>PREZZO: LOW-HIGH</option>
+                    <option value="price_desc" <%= safeFilters.sort === 'price_desc' ? 'selected' : '' %>>PREZZO: HIGH-LOW</option>
                 </select>
-
             </div>
-
-
-            <div class="filter-group">
-
-                <h3>PREZZO MASSIMO (€)</h3>
-
-                <input
-                    type="range"
-                    name="maxPrice"
-                    min="0"
-                    max="100"
-                    value="<%= safeFilters.maxPrice || 100 %>"
-                    class="slider"
-                    oninput="this.nextElementSibling.value = '€' + this.value"
-                >
-
-                <output>
-                    €<%= safeFilters.maxPrice || 100 %>
-                </output>
-
-            </div>
-
-
-            <button type="submit" class="btn-apply-filters">
-                APPLICA SETTAGGI
-            </button>
-
+            <button type="submit" class="btn-apply-filters">APPLICA SETTAGGI</button>
         </form>
 
-
         <!-- CATALOGO PRODOTTI -->
-
         <section class="catalog-container">
-
             <div class="catalog-header">
-
-                <span>
-                    RISULTATI TROVATI: [<%= safeProducts.length %>]
-                </span>
-
+                <span>RISULTATI TROVATI: [<%= safeProducts.length %>]</span>
             </div>
-
-
             <div class="product-grid">
-
                 <% safeProducts.forEach(function(prod) { %>
-
                     <div class="product-card">
-
                         <div class="card-image">
-
                             <a href="/product/<%= prod.id %>">
-
-                                <img
-                                    src="<%= prod.image %>"
-                                    alt="<%= prod.name %>"
-                                >
-
+                                <img src="<%= prod.image %>" alt="<%= prod.name %>">
                             </a>
-
-                            <form
-                                action="/cart/add/<%= prod.id %>"
-                                method="POST"
-                                style="display:inline;"
-                            >
-
-                                <button type="submit" class="quick-add">
-                                    + AGGIUNGI
-                                </button>
-
+                            <form action="/cart/add/<%= prod.id %>" method="POST" style="display:inline;">
+                                <button type="submit" class="quick-add">+ AGGIUNGI</button>
                             </form>
-
                         </div>
-
-
                         <div class="card-info">
-
-                            <p class="brand">
-                                <%= prod.brand %>
-                            </p>
-
-                            <h4 class="product-name">
-                                <%= prod.name %>
-                            </h4>
-
+                            <p class="brand"><%= prod.brand %></p>
+                            <h4 class="product-name"><%= prod.name %></h4>
                             <div class="price-row">
-
-                                <span class="price">
-                                    € <%= Number(prod.price).toFixed(2) %>
-                                </span>
-
-                                <a
-                                    href="/product/<%= prod.id %>"
-                                    class="view-detail"
-                                >
-                                    DETTAGLI
-                                </a>
-
+                                <span class="price">€ <%= Number(prod.price).toFixed(2) %></span>
+                                <a href="/product/<%= prod.id %>" class="view-detail">DETTAGLI</a>
                             </div>
-
                         </div>
-
                     </div>
-
                 <% }); %>
-
             </div>
-
         </section>
-
     </main>
 
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <p>
-            SPIRITSTORY // PROGETTO ESAME 2026 // AREA SHOP
-        </p>
-
-    </footer>
-
-</body>
-</html>
+<%- include('footer'); -%>

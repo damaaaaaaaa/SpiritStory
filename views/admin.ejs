@@ -1,0 +1,96 @@
+<%- include('header', { bodyClass: 'admin-page' }); -%>
+    <main style="max-width: 1200px; margin: 4rem auto; padding: 2rem;">
+        
+        <h1 style="color: var(--error-red); margin-bottom: 3rem;">PANNELLO DI CONTROLLO AMMINISTRATORE</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 4rem;">
+            
+            <!-- COLONNA SINISTRA: AGGIUNTA PRODOTTI -->
+            <section style="background: var(--bg-surface); padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border-light); height: fit-content;">
+                <h2 style="margin-bottom: 1.5rem; font-size: 1.2rem;">INSERISCI NUOVO PRODOTTO</h2>
+                <form action="/admin/add-product" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div class="input-box"><label>BRAND</label><input type="text" name="brand" required></div>
+                    <div class="input-box"><label>NOME PRODOTTO</label><input type="text" name="name" required></div>
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="input-box" style="flex:1;"><label>CATEGORIA</label><select name="category" required style="padding:10px; background:var(--bg-elevated); color:white; border:1px solid var(--border-focus);"><option value="distillato">Distillato</option><option value="birra">Birra</option></select></div>
+                        <div class="input-box" style="flex:1;"><label>PREZZO (€)</label><input type="number" name="price" step="0.01" required></div>
+                    </div>
+                    <!-- Aggiunta del campo STOCK per le giacenze -->
+                    <div class="input-box"><label>GIACENZA INIZIALE (STOCK)</label><input type="number" name="stock" value="10" min="0" required></div>
+                    <div class="input-box"><label>URL IMMAGINE</label><input type="text" name="image" value="/images/jack.png" required></div>
+                    <div class="input-box"><label>STORIA</label><textarea name="story" rows="3" required style="padding:10px; background:var(--bg-elevated); color:white; border:1px solid var(--border-focus);"></textarea></div>
+                    <div class="input-box"><label>DRINK TIPS</label><input type="text" name="drink_tips" required></div>
+                    <button type="submit" class="btn-primary" style="margin-top: 1rem;">+ SALVA NEL DATABASE</button>
+                </form>
+            </section>
+
+            <!-- COLONNA DESTRA: GESTIONE ORDINI E UTENTI -->
+            <div style="display: flex; flex-direction: column; gap: 3rem;">
+                
+                <section>
+                    <h2 style="margin-bottom: 1.5rem; font-size: 1.2rem;">GESTIONE ORDINI (IN TEMPO REALE)</h2>
+                    <div style="background: var(--bg-surface); padding: 1rem; border-radius: var(--radius-lg); border: 1px solid var(--border-light);">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <tr style="border-bottom: 1px solid var(--border-focus);">
+                                <th style="padding: 10px; color: var(--text-muted);">ID ORDINE</th>
+                                <th style="padding: 10px; color: var(--text-muted);">UTENTE</th>
+                                <th style="padding: 10px; color: var(--text-muted);">TOTALE</th>
+                                <th style="padding: 10px; color: var(--text-muted);">STATO PREPARAZIONE</th>
+                                <th style="padding: 10px; color: var(--text-muted);">AZIONE</th>
+                            </tr>
+                            <% locals.orders && orders.forEach(order => { %>
+                                <tr style="border-bottom: 1px solid var(--border-focus);">
+                                    <td style="padding: 15px; font-weight: 900;">#<%= order.id %></td>
+                                    <td style="padding: 15px;"><%= order.email %></td>
+                                    <td style="padding: 15px; color: var(--brand-neon);">€<%= Number(order.total).toFixed(2) %></td>
+                                    <td style="padding: 15px;">
+                                        <!-- Form asincrono per aggiornare lo stato -->
+                                        <form action="/api/admin/orders/<%= order.id %>/status" method="POST" class="status-form" style="display:flex; gap:10px;">
+                                            <select name="status" style="padding:5px; background:var(--bg-elevated); color:white; border:1px solid var(--border-focus);">
+                                                <option value="In Preparazione" <%= order.status === 'In Preparazione' ? 'selected' : '' %>>In Preparazione</option>
+                                                <option value="Spedito" <%= order.status === 'Spedito' ? 'selected' : '' %>>Spedito</option>
+                                                <option value="Annullato" <%= order.status === 'Annullato' ? 'selected' : '' %>>Annullato</option>
+                                            </select>
+                                            <button type="submit" class="btn-outline" style="padding: 5px 10px; font-size: 0.7rem;">AGGIORNA</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </table>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 style="margin-bottom: 1.5rem; font-size: 1.2rem;">DATABASE UTENTI ISCRITTI</h2>
+                    <div style="background: var(--bg-surface); padding: 1rem; border-radius: var(--radius-lg); border: 1px solid var(--border-light);">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <tr style="border-bottom: 1px solid var(--border-focus);">
+                                <th style="padding: 10px; color: var(--text-muted);">ID</th>
+                                <th style="padding: 10px; color: var(--text-muted);">NOME</th>
+                                <th style="padding: 10px; color: var(--text-muted);">EMAIL</th>
+                                <th style="padding: 10px; color: var(--text-muted);">RUOLO</th>
+                                <th style="padding: 10px; color: var(--text-muted);">ELIMINA</th>
+                            </tr>
+                            <% locals.users && users.forEach(u => { %>
+                                <tr style="border-bottom: 1px solid var(--border-focus);">
+                                    <td style="padding: 15px;"><%= u.id %></td>
+                                    <td style="padding: 15px;"><%= u.username %></td>
+                                    <td style="padding: 15px;"><%= u.email %></td>
+                                    <td style="padding: 15px; font-weight: 900; color: <%= u.role === 'admin' ? 'var(--error-red)' : 'white' %>"><%= u.role.toUpperCase() %></td>
+                                    <td style="padding: 15px;">
+                                        <% if (u.role !== 'admin') { %>
+                                            <form action="/admin/users/delete/<%= u.id %>" method="POST">
+                                                <button type="submit" style="background:transparent; border:none; color:var(--error-red); cursor:pointer; font-weight:900;">X</button>
+                                            </form>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+<%- include('footer'); -%>
